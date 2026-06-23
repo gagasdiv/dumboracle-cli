@@ -1,5 +1,7 @@
 # dumb-oracle
 
+> ⚠️ Disclaimer: fully vibe-coded with Cursor
+
 A small, error-tolerant Oracle admin CLI for **local** databases. It replaces the
 old `.bat` + `.sql` scripts with a single maintainable Python tool.
 
