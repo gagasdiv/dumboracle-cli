@@ -1,0 +1,48 @@
+# ---------------------------------------------------------------------------
+# dumb-oracle connection config
+#
+# Copy this file to `connections.yaml` and edit it.
+# The tool looks for `connections.yaml` in the current directory by default,
+# or pass --config <path>.
+# ---------------------------------------------------------------------------
+
+# Directory holding the Oracle thick client libraries (oci.dll / libclntsh.so).
+# This is used for python-oracledb "thick" mode.
+#   - Full client    : <ORACLE_HOME>\bin            (Windows)
+#   - Instant Client  : the unzipped instantclient_XX_Y folder
+# Leave empty ("") to let the OS find it on PATH / registry.
+# A 23ai client can talk to databases 19c, 21c and 23ai (and up).
+oracle_client_lib_dir: ""
+
+# Directory holding the Data Pump executables (expdp / impdp).
+# Usually <ORACLE_HOME>\bin. Full client or DB install only
+# (Instant Client does NOT ship expdp/impdp).
+# Leave empty ("") to find them on PATH.
+datapump_bin_dir: ""
+
+# One entry per database you want to connect to.
+#
+# Optional `alias`: a short handle you can type at the "Choose a database" menu
+# instead of the row number (case-insensitive). Handy for quick connects.
+connections:
+  - name: free23
+    alias: hb1
+    description: Local Oracle 23ai Free (PDB)
+    dsn: localhost:1521/FREEPDB1
+    username: system
+    password: oracle
+    # sysdba: true   # uncomment + use a SYS user for rename / DB-level supplemental log
+
+  - name: ora19
+    alias: hb2
+    description: Local Oracle 19c (PDB)
+    dsn: localhost:1521/ORCLPDB1
+    username: system
+    password: oracle
+
+  - name: ora19-sys
+    description: Local Oracle 19c as SYSDBA (needed for schema rename)
+    dsn: localhost:1521/ORCLPDB1
+    username: sys
+    password: oracle
+    sysdba: true
